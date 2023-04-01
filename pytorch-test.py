@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms
+import time
 
 data = torch.tensor([0.5, 0.2])
 w = torch.tensor([[1.0,2],[3,4]], requires_grad=True)
@@ -57,6 +58,7 @@ optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
 total_step = len(train_loader)
 for epoch in range(num_epochs):
+    start_time = time.time()
     for i, (images, labels) in enumerate(train_loader):
         images = images.reshape(-1, sequence_length, input_size).to(device)
         labels = labels.to(device)
@@ -70,6 +72,9 @@ for epoch in range(num_epochs):
         
         if (i+1) % 100 == 0:
             print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, i+1, total_step, loss.item()))
+    
+    end_time = time.time()
+    print("Epoch time: ", end_time-start_time)
 
 with torch.no_grad():
     correct = 0
