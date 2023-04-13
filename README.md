@@ -14,7 +14,7 @@
   d.print("d");
   w.d().grad.print("grad of a"); // now we get grad of weight tensor
   ```
-  #### Simple computation with pytorch:
+  #### Simple computation with PyTorch:
   ```python
   data = torch.tensor([0.5, 0.2])
   w = torch.tensor([[1.0,2],[3,4]], requires_grad=True)
@@ -51,7 +51,7 @@
       }
   };
   ```
-  #### Build a model with pytorch:
+  #### Build a model with PyTorch:
   ```python
   class LSTM(nn.Module):
       def __init__(self, input_size, hidden_size, num_layers, num_classes):
@@ -73,5 +73,10 @@
   ```
 
 * objTensor has advanced memory management and caching strategies that minimize memory operations during the training process, making its performance exceed that of common deep learning libraries when using CPU. Below is a performance test of training a simple LSTM network using the MNIST database:
+  #### Time required per epoch
+  ||objTensor|PyTorch|
+  |---|---|---|
+  |Intel i5 3.0G (6 cores)|2.3|9.8|
+  |Apple M1 Pro (8 cores)|1.0|4.0|
 
 * objTensor relies on third-party BLAS computing libraries. On macOS, the Accelerate framework can be used. On Linux or Windows, OpenBLAS needs to be installed and imported during compilation. The project's source code only describes how to compile and test files on macOS.
